@@ -11,9 +11,9 @@ cd /workspaces/agentic-factory-hack/challenge-0
 # If RG_SUFFIX is already defined, it uses the existing value; otherwise, it defaults to "hack"
 export RG_SUFFIX="${RG_SUFFIX:-cm}"
 export RESOURCE_GROUP="rg-tire-factory-hack-${RG_SUFFIX}"
-# Sets the location environment variable with a default value of "southafricanorth"
-# If LOCATION is already defined, it uses the existing value; otherwise, it defaults to "southafricanorth"
-export LOCATION="${LOCATION:-southafricanorth}"
+# Sets the location environment variable with a default value of "swedencentral"
+# If LOCATION is already defined, it uses the existing value; otherwise, it defaults to "swedencentral"
+export LOCATION="${LOCATION:-swedencentral}"
 
 echo "=== Deployment Configuration ==="
 echo "Resource Group: $RESOURCE_GROUP"
