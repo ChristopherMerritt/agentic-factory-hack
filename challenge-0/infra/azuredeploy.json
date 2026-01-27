@@ -15,7 +15,8 @@
       "allowedValues": [
         "swedencentral",
         "francecentral",
-        "germanywestcentral"
+        "germanywestcentral",
+        "southafricanorth"
       ],
       "metadata": {
         "description": "Azure location where resources should be deployed"
