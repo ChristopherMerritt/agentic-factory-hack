@@ -1,6 +1,7 @@
 {
-    "name": "Python 3",
+    "name": "agentic-factory-hack",
     "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+    "runArgs": ["--name", "agentic-factory-hack"],
     "forwardPorts": [
         5231
     ],
@@ -13,6 +14,7 @@
     },
     "features": {
         "ghcr.io/devcontainers/features/azure-cli:1": {
+            "version": "latest",
             "installBicep": true
         },
         "ghcr.io/devcontainer-community/devcontainer-features/astral.sh-uv:1": {},
@@ -29,7 +31,7 @@
             "installUsingApt": true
         }
     },
-    "postCreateCommand": "pip3 install --upgrade pip && pip3 install --user -r requirements.txt && bash .devcontainer/setup-dotnet.sh",
+    "postCreateCommand": "pip3 install --upgrade pip && pip3 install --user -r requirements.txt && bash .devcontainer/setup-dotnet.sh && bash challenge-0/update-az-cli.sh",
     "customizations": {
         "vscode": {
             "extensions": [
