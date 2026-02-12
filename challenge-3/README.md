@@ -59,7 +59,7 @@ Input (READ):                         Output (WRITE):
 ├─ WorkOrders                         ├─ MaintenanceSchedules
 ├─ MaintenanceHistory                 │  └─ scheduled_date
 ├─ MaintenanceWindows                 │  └─ risk_score (0-100)
-└─ Machines                            │  └─ predicted_failure_probability
+└─ Machines                           │  └─ predicted_failure_probability
                                       │  └─ recommended_action
                                       │  └─ maintenance_window
                                       │  └─ reasoning
@@ -73,7 +73,7 @@ Input (READ):                         Output (WRITE):
 ├─ WorkOrders                         ├─ PartsOrders
 ├─ PartsInventory                     │  └─ supplier_id, supplier_name
 ├─ Suppliers                          │  └─ order_items (part, qty, cost)
-└─ Machines                            │  └─ total_cost
+└─ Machines                           │  └─ total_cost
                                       │  └─ expected_delivery_date
                                       │  └─ reasoning
                                       └─ WorkOrders (status update to 'PartsOrdered' or 'Ready')
