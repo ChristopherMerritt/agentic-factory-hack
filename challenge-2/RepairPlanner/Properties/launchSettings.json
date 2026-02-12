@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "RepairPlanner": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "RepairPlanner (Tests)": {
+      "commandName": "Project",
+      "commandLineArgs": "-t",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "RepairPlanner (Help)": {
+      "commandName": "Project",
+      "commandLineArgs": "--help",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
