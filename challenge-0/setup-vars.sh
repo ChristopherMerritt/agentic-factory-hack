@@ -14,7 +14,13 @@ echo "LOCATION=$LOCATION"
 # get keys for az resources
 # ./challenge-0/get-keys.sh --resource-group $RESOURCE_GROUP
 
-export $(cat ./.env | xargs)
+# set env vars (at command line)
+# export $(cat ../.env | xargs)
+
+# alt way to set env vars when running script
+set -a
+source ../.env
+set +a
 echo "AZURE_OPENAI_SERVICE_NAME=$AZURE_OPENAI_SERVICE_NAME"
 
 ME_OBJECT_ID="$(az ad signed-in-user show --query id -o tsv)"

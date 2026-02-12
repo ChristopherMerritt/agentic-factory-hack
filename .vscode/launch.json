@@ -1,0 +1,38 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Repair Planner",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/challenge-2/RepairPlanner/bin/Debug/net10.0/RepairPlanner.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/challenge-2/RepairPlanner",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Repair Planner (Tests)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/challenge-2/RepairPlanner/bin/Debug/net10.0/RepairPlanner.dll",
+            "args": ["-t"],
+            "cwd": "${workspaceFolder}/challenge-2/RepairPlanner",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Repair Planner (Help)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/challenge-2/RepairPlanner/bin/Debug/net10.0/RepairPlanner.dll",
+            "args": ["--help"],
+            "cwd": "${workspaceFolder}/challenge-2/RepairPlanner",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}
