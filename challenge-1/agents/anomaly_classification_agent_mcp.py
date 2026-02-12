@@ -13,16 +13,13 @@ project_endpoint = os.environ.get("AZURE_AI_PROJECT_ENDPOINT")
 project_resource_id = os.environ.get("AZURE_AI_PROJECT_RESOURCE_ID")
 model_name = os.environ.get("MODEL_DEPLOYMENT_NAME")
 
-
 # MCP configuration
 mcp_endpoint = os.environ.get("MACHINE_MCP_SERVER_ENDPOINT")
 apim_subscription_key = os.environ.get("APIM_SUBSCRIPTION_KEY")
 machine_data_connection_name = "machine-data-connection"
 maintenance_data_connection_name = "maintenance-data-connection"
 machine_data_mcp_endpoint = os.environ.get("MACHINE_MCP_SERVER_ENDPOINT")
-mainteance_data_mcp_endpoint = os.environ.get(
-    "MAINTENANCE_MCP_SERVER_ENDPOINT")
-
+mainteance_data_mcp_endpoint = os.environ.get("MAINTENANCE_MCP_SERVER_ENDPOINT")
 
 def create_apim_mcp_connection(connection_name, mcp_endpoint):
     # Provide connection details
@@ -57,7 +54,6 @@ def create_apim_mcp_connection(connection_name, mcp_endpoint):
     response.raise_for_status()
     print(
         f"✅ Connection '{project_connection_name}' created successfully.")
-
 
 async def main():
     try:

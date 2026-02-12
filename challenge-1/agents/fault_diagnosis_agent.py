@@ -17,7 +17,6 @@ machine_wiki_mcp_endpoint = f"{search_endpoint}knowledgebases/{knowledge_base_na
 machine_data_mcp_endpoint = os.environ.get("MACHINE_MCP_SERVER_ENDPOINT")
 apim_subscription_key = os.environ.get("APIM_SUBSCRIPTION_KEY")
 
-
 async def main():
     try:
 
@@ -71,8 +70,13 @@ Grounding rules (IMPORTANT):
                         project_connection_id="machine-data-connection"
                     ),
 
-                    # TODO: add Foundry IQ MCP tool
-
+                    # add Foundry IQ MCP tool
+                    MCPTool(
+                        server_label="machine-wiki",
+                        server_url=machine_wiki_mcp_endpoint,
+                        require_approval="never",
+                        project_connection_id="machine-wiki-connection"
+                    )
                 ]
 
             ))
