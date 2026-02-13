@@ -153,9 +153,13 @@ What it does
 #### Task 1.1 Run the Agent
 
 ```bash
-# # Ensure you are located in the challenge-3 directory
+# Ensure you are located in the challenge-3 directory
 cd challenge-3
 
+# load the environment variables
+export $(cat ../.env | xargs)
+
+# run the agent
 python agents/maintenance_scheduler_agent.py wo-2024-456
 ```
 

@@ -1,0 +1,16 @@
+# kql queries for application insights
+
+customMetrics
+| project timestamp, name, value 
+| where 
+  1==1
+  and name == "gen_ai.client.operation.duration"
+  and timestamp >= todatetime('2026-02-12 13:00:00')
+| order by timestamp asc
+
+dependencies
+| project timestamp, duration, myDuration = duration / 1000, name, agent = substring(name, 13)
+| where
+  1==1
+  and timestamp >= todatetime('2026-02-12 13:00:00')
+  and name startswith "invoke_agent"
