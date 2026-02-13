@@ -221,11 +221,34 @@ static async Task<WorkflowResponse> ExecuteWorkflowAsync(
     string input,
     ILogger logger)
 {
+    // Extract machine_id from initial JSON input to preserve it across the workflow
+    string? machineId = null;
+    try
+    {
+        var jsonDoc = JsonDocument.Parse(input);
+        if (jsonDoc.RootElement.TryGetProperty("machine_id", out var machineIdProp))
+        {
+            machineId = machineIdProp.GetString();
+            logger.LogInformation("Extracted machine_id from input: {MachineId}", machineId);
+        }
+    }
+    catch (JsonException)
+    {
+        // Input might not be JSON, that's okay
+    }
+
     // Create executors that pass only text between agents
     var executors = agents.Select(a => new TextOnlyAgentExecutor(a)).ToList();
 
     // Clear results from any previous run
     TextOnlyAgentExecutor.ClearResults();
+
+    // Set machine_id context for preservation across agents
+    if (!string.IsNullOrEmpty(machineId))
+    {
+        TextOnlyAgentExecutor.SetMachineIdContext(machineId);
+        logger.LogInformation("Set machine_id context for workflow: {MachineId}", machineId);
+    }
 
     // Build sequential workflow: agent1 → agent2 → agent3 → ...
     var workflowBuilder = new WorkflowBuilder(executors[0]);

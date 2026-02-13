@@ -25,11 +25,23 @@ public sealed class TextOnlyAgentExecutor : Executor<string, string>
     // Callback for streaming events - set via SetEventCallback before workflow execution
     private static Func<AgentStepResult, Task>? _onStepCompleted;
 
+    // Context preservation - machine_id to inject into each agent's input
+    private static string? _preservedMachineId;
+
     public static IEnumerable<AgentStepResult> StepResults => _stepResults.ToArray();
 
     public static void ClearResults()
     {
         while (_stepResults.TryDequeue(out _)) { }
+        _preservedMachineId = null;
+    }
+
+    /// <summary>
+    /// Sets the machine ID to be preserved across all agent executions in the workflow.
+    /// </summary>
+    public static void SetMachineIdContext(string? machineId)
+    {
+        _preservedMachineId = machineId;
     }
 
     /// <summary>
@@ -53,8 +65,16 @@ public sealed class TextOnlyAgentExecutor : Executor<string, string>
 
         try
         {
+            // Inject preserved machine_id context for agents that don't already have it
+            // This ensures RepairPlanner and downstream agents can extract the machine ID
+            var enrichedInput = input;
+            if (!string.IsNullOrEmpty(_preservedMachineId) && !input.StartsWith("[CONTEXT: machine_id="))
+            {
+                enrichedInput = $"[CONTEXT: machine_id={_preservedMachineId}]\n\n{input}";
+            }
+
             // Create a clean message with only text input (no MCP tool history)
-            var messages = new List<ChatMessage> { new ChatMessage(ChatRole.User, input) };
+            var messages = new List<ChatMessage> { new ChatMessage(ChatRole.User, enrichedInput) };
 
             // Run the agent
             var response = await _agent.RunAsync(messages, null);

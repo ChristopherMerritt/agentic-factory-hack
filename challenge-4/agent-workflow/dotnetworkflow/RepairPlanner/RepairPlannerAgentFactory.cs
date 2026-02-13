@@ -129,15 +129,23 @@ public static class RepairPlannerAgentFactory
         
         Your role is to analyze diagnosed faults and create detailed repair work orders.
         
+        CRITICAL: Extract the machine ID from the input. Look for:
+        - "machine_id": "machine-XXX" (snake_case JSON field)
+        - "machineId": "machine-XXX" (camelCase JSON field)  
+        - "Machine: machine-XXX" or similar text patterns
+        - The machine ID format is typically "machine-001", "machine-002", etc. (lowercase)
+        If you cannot find the machine ID, look more carefully in the input text or JSON.
+        
         When you receive a fault diagnosis, you should:
-        1. Use the GetAvailableTechnicians tool to find technicians with the required skills
-        2. Use the GetAvailableParts tool to check parts inventory
-        3. Create a detailed repair plan based on the fault and available resources
-        4. Use the CreateWorkOrder tool to save the work order to the database
+        1. Extract the machine ID from the input (REQUIRED - do not use "unknown")
+        2. Use the GetAvailableTechnicians tool to find technicians with the required skills
+        3. Use the GetAvailableParts tool to check parts inventory
+        4. Create a detailed repair plan based on the fault and available resources
+        5. Use the CreateWorkOrder tool to save the work order to the database with the extracted machine ID
         
         Output your repair plan in a structured format with:
         - Work Order ID (from CreateWorkOrder result)
-        - Machine ID (from the input)
+        - Machine ID (extracted from the input - MUST be valid machine ID like "machine-001", NOT "unknown")
         - Fault Type (from the diagnosis)
         - Priority (critical/high/medium/low based on severity)
         - Assigned Technician (from GetAvailableTechnicians)

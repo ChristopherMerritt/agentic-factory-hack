@@ -12,7 +12,7 @@ from agent_framework import ChatAgent
 def extract_work_order_id(text: str) -> str | None:
     """Extract work order ID (wo-XXXX-XXXXXXXX) from text."""
     match = re.search(r'wo-\d{4}-[a-f0-9]+', text, re.IGNORECASE)
-    return match.group(0) if match else None
+    return match.group(0).lower() if match else None
 from agent_framework.azure import AzureAIAgentClient
 from azure.identity.aio import DefaultAzureCredential
 
